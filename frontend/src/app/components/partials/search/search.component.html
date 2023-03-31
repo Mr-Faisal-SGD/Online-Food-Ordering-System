@@ -1,0 +1,10 @@
+<div>
+  <input
+    #input
+    type="text"
+    placeholder="Search Food"
+    (keyup.enter)="search(input.value)"
+    value="{{ searchTerm }}"
+  />
+  <button (click)="search(input.value)">Search</button>
+</div>
