@@ -1,4 +1,4 @@
-<header style="margin-bottom: 5px;">
+<header style="margin-bottom: 5px">
   <div class="container">
     <a routerLink="/" class="logo">Food Mine!</a>
     <nav>
@@ -15,7 +15,9 @@
           </div>
         </li>
         <li>
-          <a routerLink="/cart-page"> Cart <span>3</span> </a>
+          <a routerLink="/cart-page">
+            Cart <span *ngIf="cartQuantity">{{ cartQuantity }}</span>
+          </a>
         </li>
       </ul>
     </nav>
