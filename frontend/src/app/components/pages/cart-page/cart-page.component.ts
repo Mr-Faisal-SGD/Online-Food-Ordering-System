@@ -22,13 +22,15 @@ export class CartPageComponent {
   removeFromCart(cartItem: CartItem) {
     this.cartService.removeFromCart(cartItem.food.id);
   }
-  
-  onDecrement(cartItem: CartItem){
-    cartItem.quantity--;
-    this.cartService.changeQuantity(cartItem.food.id, cartItem.quantity);
+
+  onDecrement(cartItem: CartItem) {
+    if (cartItem.quantity > 1) {
+      cartItem.quantity--;
+      this.cartService.changeQuantity(cartItem.food.id, cartItem.quantity);
+    }
   }
 
-  onIncrement(cartItem: CartItem){
+  onIncrement(cartItem: CartItem) {
     cartItem.quantity++;
     this.cartService.changeQuantity(cartItem.food.id, cartItem.quantity);
   }
