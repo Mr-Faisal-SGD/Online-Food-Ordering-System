@@ -12,6 +12,7 @@ export class LoginPageComponent implements OnInit {
   loginForm!: FormGroup;
   isSubmitted = false;
   returnUrl = '';
+  error = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,6 +45,9 @@ export class LoginPageComponent implements OnInit {
       })
       .subscribe(() => {
         this.router.navigateByUrl(this.returnUrl);
+      },
+      errorMessage => {
+        this.error = errorMessage;
       });
   }
 }

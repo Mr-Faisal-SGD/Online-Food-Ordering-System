@@ -14,7 +14,14 @@
         type="password"
         label="Password"
       ></text-input>
+      <div class="error"> &nbsp; {{ error }}</div>
       <default-button text="Login"></default-button>
+      <div class="register">
+        New User? &nbsp;
+        <a routerLink="/register" [queryParams]="{ returnUrl: returnUrl }"
+          >Register</a
+        >
+      </div>
     </form>
   </div>
 </div>

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap, throwError } from 'rxjs';
 import { User } from '../shared/models/User.model';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { HttpClient } from '@angular/common/http';
-import { USER_LOGIN_URL } from '../shared/constants/urls';
+import { USER_LOGIN_URL, USER_REGISTER_URL } from '../shared/constants/urls';
 import { Router } from '@angular/router';
+import { IUserRegister } from '../shared/interfaces/IUserRegister';
+import { catchError } from 'rxjs';
 
 const USER_KEY = 'user';
 
@@ -24,12 +26,34 @@ export class UserService {
 
   login(userLogin: IUserLogin): Observable<User> {
     return this.http.post<User>(USER_LOGIN_URL, userLogin).pipe(
+      catchError((errorResponse) => {
+        const errorMessage = errorResponse.error;
+        return throwError(() => {
+          return new Error(errorMessage);
+        });
+      }),
       tap({
         next: (user) => {
           this.setUserToLocalStorage(user);
           this.userSubject.next(user);
         },
-        error: (errorResponse) => {},
+      })
+    );
+  }
+
+  register(userRegister: IUserRegister): Observable<User> {
+    return this.http.post<User>(USER_REGISTER_URL, userRegister).pipe(
+      catchError((errorResponse) => {
+        const errorMessage = errorResponse.error;
+        return throwError(() => {
+          return new Error(errorMessage);
+        });
+      }),
+      tap({
+        next: (user) => {
+          this.setUserToLocalStorage(user);
+          this.userSubject.next(user);
+        },
       })
     );
   }
