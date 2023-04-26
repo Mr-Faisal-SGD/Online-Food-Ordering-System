@@ -61,7 +61,7 @@ export const sample_foods: any[] = [
     cookTime: "40-50",
     favorite: false,
     origins: ["italy"],
-    stars: 4.0,
+    stars: 43,
     imageUrl: "assets/food-6.jpg",
     tags: ["FastFood", "Pizza", "Lunch"],
   },

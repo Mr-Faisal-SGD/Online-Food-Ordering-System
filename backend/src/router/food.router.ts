@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { sample_foods, sample_tags } from "../data";
+import { sample_foods } from "../data";
 import asyncHandler from "express-async-handler";
 import { FoodModel } from "../models/food.model";
 
@@ -67,14 +67,18 @@ router.get(
   })
 );
 
-router.get("/tag/:search", (req, res) => {
-  const params = req.params.search;
-  const foods =
-    params === "All"
-      ? sample_foods
-      : sample_foods.filter((food) => food.tags?.includes(params));
-  res.send(foods);
-});
+router.get(
+  "/tag/:search",
+  asyncHandler(async (req, res) => {
+    const foods = await FoodModel.find();
+    const params = req.params.search;
+    const foodes =
+      params === "All"
+        ? foods
+        : foods.filter((food) => food.tags?.includes(params));
+    res.send(foodes);
+  })
+);
 
 router.get(
   "/food/:foodid",

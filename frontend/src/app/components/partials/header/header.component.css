@@ -62,3 +62,7 @@ a span {
   width: 100%;
   min-width: 8rem;
 }
+
+.logout {
+  cursor: pointer;
+}
