@@ -70,13 +70,10 @@ router.get(
 router.get(
   "/tag/:search",
   asyncHandler(async (req, res) => {
-    const foods = await FoodModel.find();
-    const params = req.params.search;
-    const foodes =
-      params === "All"
-        ? foods
-        : foods.filter((food) => food.tags?.includes(params));
-    res.send(foodes);
+    const foods = await FoodModel.find(
+      req.params.search === "All" ? {} : { tags: req.params.search }
+    );
+    res.send(foods);
   })
 );
 
@@ -85,6 +82,14 @@ router.get(
   asyncHandler(async (req, res) => {
     const food = await FoodModel.findById(req.params.foodid);
     res.send(food);
+  })
+);
+
+router.delete(
+  "/food/delete/:foodid",
+  asyncHandler(async (req, res) => {
+    await FoodModel.findByIdAndDelete(req.params.foodid);
+    res.send("Food Deleted Successfully!");
   })
 );
 

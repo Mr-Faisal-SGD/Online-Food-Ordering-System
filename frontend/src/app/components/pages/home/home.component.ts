@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FoodService } from 'src/app/services/food.service';
+import { UserService } from 'src/app/services/user.service';
 import { Food } from 'src/app/shared/models/food.model';
 
 @Component({
@@ -13,7 +14,7 @@ export class HomeComponent {
   foods: Food[] = [];
   constructor(
     private foodService: FoodService,
-    activatedRoute: ActivatedRoute
+    activatedRoute: ActivatedRoute,
   ) {
     let foodsObservable: Observable<Food[]>;
     activatedRoute.params.subscribe((params) => {

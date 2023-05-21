@@ -15,6 +15,8 @@ import {
   providedIn: 'root',
 })
 export class FoodService {
+  response!:{};
+
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Food[]> {
@@ -35,5 +37,10 @@ export class FoodService {
 
   getFoodById(foodId: string): Observable<Food> {
     return this.http.get<Food>(FOODS_BY_ID_URL + foodId);
+  }
+
+  onDelete(foodId: string) {
+    this.response = this.http.delete(FOODS_BY_ID_URL + 'delete/' + foodId);
+    console.log(this.response);
   }
 }

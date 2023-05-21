@@ -4,7 +4,6 @@ import { User } from '../shared/models/User.model';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { HttpClient } from '@angular/common/http';
 import { USER_LOGIN_URL, USER_REGISTER_URL } from '../shared/constants/urls';
-import { Router } from '@angular/router';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
 import { catchError } from 'rxjs';
 
@@ -20,8 +19,12 @@ export class UserService {
 
   public userObservable: Observable<User>;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
     this.userObservable = this.userSubject.asObservable();
+  }
+
+  public get getUser(): User {
+    return this.userSubject.value;
   }
 
   login(userLogin: IUserLogin): Observable<User> {

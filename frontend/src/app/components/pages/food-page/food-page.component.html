@@ -37,6 +37,10 @@ resetLinkText="Back to Homepage"></app-not-found>
     <div class="price">
       <span>{{ food.price | currency }}</span>
     </div>
-    <button (click)="addToCart()">Add to Cart</button>
+    <button *ngIf="!user.isAdmin" (click)="addToCart()">Add to Cart</button>
+    <div *ngIf="user.isAdmin" class="edit">
+    <button>Edit</button>
+    <button (click)="onDelete()">Delete</button>
+    </div>
   </div>
 </div>
