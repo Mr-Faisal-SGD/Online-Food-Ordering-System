@@ -59,26 +59,31 @@ router.post(
     };
 
     const dbUser = await UserModel.create(newUser);
-    const userWithToken = generateTokenResponse(dbUser);
-    res.send(userWithToken);
+    res.send(generateTokenResponse(dbUser));
   })
 );
 
-const generateTokenResponse = (user: any) => {
+const generateTokenResponse = (user: User) => {
   const token = jwt.sign(
     {
       id: user.id,
       email: user.email,
       isAdmin: user.isAdmin,
     },
-    "SomeRandomText",
+    "Some random text",
     {
       expiresIn: "30d",
     }
   );
 
-  user.token = token;
-  return user;
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    isAdmin: user.isAdmin,
+    address: user.address,
+    token: token,
+  };
 };
 
 export default router;
