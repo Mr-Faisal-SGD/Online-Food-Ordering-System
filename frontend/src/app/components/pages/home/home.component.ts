@@ -28,7 +28,6 @@ export class HomeComponent {
 
       foodsObservable.subscribe((foods) => {
         this.foods = foods;
-        console.log(this.foods);
       });
     });
   }

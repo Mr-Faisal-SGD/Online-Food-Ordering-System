@@ -1,11 +1,12 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
 import cors from "cors";
 import foodRouter from "./router/food.router";
 import userRouter from "./router/user.router";
-import { dbConnect } from './configs/database.config';
+import { dbConnect } from "./configs/database.config";
+import orderRouter from "./router/order.router";
 dbConnect();
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(
 
 app.use("/api/foods", foodRouter);
 app.use("/api/users", userRouter);
+app.use("/api/orders", orderRouter);
 
 const port = 5000;
 

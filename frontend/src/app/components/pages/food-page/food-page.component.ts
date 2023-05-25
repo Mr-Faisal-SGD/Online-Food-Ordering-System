@@ -20,13 +20,11 @@ export class FoodPageComponent {
     private foodService: FoodService,
     private cartService: CartService,
     private userService: UserService,
-    private router: Router
   ) {
     activatedRoute.params.subscribe((params) => {
       if (params.id)
         foodService.getFoodById(params.id).subscribe((food) => {
           this.food = food;
-          console.log(this.food);
           this.params = params.id;
         });
     });

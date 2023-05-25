@@ -25,7 +25,7 @@ router.post(
   "/login",
   asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-    const user = await UserModel.findOne({email});
+    const user = await UserModel.findOne({ email });
 
     if (user) {
       const passwordmatch = await bcrypt.compare(password, user.password);
@@ -67,6 +67,7 @@ router.post(
 const generateTokenResponse = (user: any) => {
   const token = jwt.sign(
     {
+      id: user.id,
       email: user.email,
       isAdmin: user.isAdmin,
     },
