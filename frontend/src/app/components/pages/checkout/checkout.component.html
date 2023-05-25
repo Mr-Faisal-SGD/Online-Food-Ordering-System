@@ -17,3 +17,4 @@
     <button (click)="createOrder()">Go To Payment</button>
   </div>
 </div>
+<div><app-alert-box *ngIf="error" [message]="error" (click)="clear()">Testing</app-alert-box></div>

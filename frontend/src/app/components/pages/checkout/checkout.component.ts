@@ -12,6 +12,8 @@ import { Order } from 'src/app/shared/models/Order';
 export class CheckoutComponent implements OnInit {
   order: Order = new Order();
 
+  error: string = '';
+
   checkoutForm!: FormGroup;
 
   constructor(
@@ -29,7 +31,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let {name, address} = this.userService.getUser;
+    let { name, address } = this.userService.getUser;
     this.checkoutForm = this.formBuilder.group({
       name: [name, Validators.required],
       address: [address, Validators.required],
@@ -44,8 +46,16 @@ export class CheckoutComponent implements OnInit {
     if (this.checkoutForm.invalid) {
       return;
     }
+
+    if (!this.order.addressLatLng) {
+      this.error = 'Please select your location on the map';
+      return;
+    }
     this.order.name = this.fc.name.value;
     this.order.address = this.fc.address.value;
   }
 
+  clear() {
+    this.error = '';
+  }
 }

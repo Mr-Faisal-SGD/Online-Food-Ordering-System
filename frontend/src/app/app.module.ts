@@ -26,6 +26,7 @@ import { CheckoutComponent } from './components/pages/checkout/checkout.componen
 import { OrdersItemListComponent } from './components/partials/orders-item-list/orders-item-list.component';
 import { MapComponent } from './components/partials/map/map.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { AlertBoxComponent } from './shared/alert-box/alert-box.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     CheckoutComponent,
     OrdersItemListComponent,
     MapComponent,
+    AlertBoxComponent,
   ],
   imports: [
     BrowserModule,
