@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { FoodService } from 'src/app/services/food.service';
 import { UserService } from 'src/app/services/user.service';
@@ -19,7 +19,7 @@ export class FoodPageComponent {
     activatedRoute: ActivatedRoute,
     private foodService: FoodService,
     private cartService: CartService,
-    private userService: UserService,
+    private userService: UserService
   ) {
     activatedRoute.params.subscribe((params) => {
       if (params.id)
